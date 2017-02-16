@@ -6,7 +6,6 @@ import com.synisys.utilities.CommandType;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -15,27 +14,26 @@ import java.util.logging.Logger;
  * Created by Garik Kalashyan on 2/16/2017.
  */
 public class CommandRunner {
-    private static final String FILE_PATH = "src\\main\\resources\\data.txt";
+    private static final String FILE_PATH = "srrc\\main\\resources\\data.txt";
     private static final String FILE_NUMBERS_PATH = "src\\main\\resources\\dataForNumbers.txt";
 
     private static final Logger LOGGER = Logger.getLogger(CommandRunner.class.getName());
-
+    private static boolean isExited = false;
     public static void runCommands() {
         LOGGER.log(Level.INFO,"Is called runCommands()");
-        while (true) {
+        while (!isExited) {
+            System.out.println("Pass command:");
+            System.out.print(">> ");
+            Scanner scanner = new Scanner(System.in);
+            String currentCommand = scanner.next();
             try {
-                handleCommand(CommandType.valueOff(getCommand()));
+                handleCommand(CommandType.valueOff(currentCommand));
             } catch (ResourcesNotFoundException e) {
                 e.printStackTrace();
             }
-        }//093321268
+        }
     }
 
-    private static String getCommand() {
-        System.out.println("Pass command:");
-        System.out.print(">> ");
-        return new Scanner(System.in).next();
-    }
 
 
     private static void handleCommand(CommandType commandType) throws ResourcesNotFoundException {
@@ -49,6 +47,10 @@ public class CommandRunner {
             case READ_ONLY_NUMBERS:
                 readOnlyNumbers();
                 break;
+            case EXIT:
+                LOGGER.log(Level.INFO,"The program is existed.");
+                isExited = true;
+
         }
     }
 

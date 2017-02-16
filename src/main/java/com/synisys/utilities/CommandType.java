@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 public enum CommandType {
     READ_ALL_DATA("readAllData"),
     READ_ONLY_NUMBERS("readOnlyNumbers"),
+    EXIT("exit"),
     READ_ONLY_LETTERS("readOnlyLetters");
 
     private static final Logger LOGGER = Logger.getLogger(CommandType.class.getName());
