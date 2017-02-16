@@ -37,11 +37,14 @@ public enum CommandType {
 
 
     public static CommandType valueOff(String commandName){
+        System.out.println("trying find command.");
         if( _values.get(commandName) == null) {
             CommandNotFoundException commandNotFoundException =  new CommandNotFoundException("Command with name: " + commandName + " not found");
             commandNotFoundException.printStackTrace();
+            System.out.println("doesn't find command, and throws runtime exception" + commandNotFoundException.getClass());
             throw commandNotFoundException;
         }
+        System.out.println("command is ok :) ");
         return _values.get(commandName);
     }
 }
